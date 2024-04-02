@@ -116,7 +116,7 @@ public class EquipedWeaponhandler : MonoBehaviour
             Tongs.SetActive(true);
         }
 
-        canChangeWeapon = true;
+        //canChangeWeapon = true;
 
 
 
@@ -126,11 +126,10 @@ public class EquipedWeaponhandler : MonoBehaviour
     {
         
 
-        if (Input.GetKeyDown("space") && canChangeWeapon) //&& !isAttacking)
+        if (Input.GetKeyDown("space") && canChangeWeapon)
         {
             //animator.enabled = true;
             canChangeWeapon = false;
-            //isAttacking = true;
 
             if (currentWeapon == "FryingPan")
             {
@@ -145,6 +144,15 @@ public class EquipedWeaponhandler : MonoBehaviour
                 
 
             }
+            else if (currentWeapon == "BlowTorch")
+            {
+
+                animator = this.gameObject.transform.GetChild(2).gameObject.GetComponent<Animator>();
+
+                animator.SetBool("BlowTorchIsAttacking", true);
+
+
+            }
 
         }
 
@@ -152,11 +160,19 @@ public class EquipedWeaponhandler : MonoBehaviour
 
     public void endOfAttack()
     {
-
-        animator.SetBool("FryingPanIsAttacking", false);
+        if (currentWeapon == "FryingPan")
+        {
+            animator.SetBool("FryingPanIsAttacking", false);
+        }
+        else if (currentWeapon == "BlowTorch")
+        {
+            animator.SetBool("BlowTorchIsAttacking", false);
+        }
+        
+       
         canChangeWeapon = true;
 
-        animator.enabled = false;
+        //animator.enabled = false;
 
     }
 

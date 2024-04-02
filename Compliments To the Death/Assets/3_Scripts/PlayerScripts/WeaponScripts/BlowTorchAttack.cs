@@ -1,17 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
-public class FryingPanAttack : MonoBehaviour
+public class BlowTorchAttack : MonoBehaviour
 {
-
     private EnemyHpHandler enemyHpHandler;
-    private Rigidbody2D enemyRigidbody;
-
+    private EquipedWeaponhandler equipedWeaponHandler;
     public GameObject player;
-    private Rigidbody2D playerRB;
-    private Vector2 KnockBack;
 
     public float damage;
     private bool canAttack;
@@ -22,7 +17,7 @@ public class FryingPanAttack : MonoBehaviour
     {
         canAttack = true;
         coolDown = 1.5f;
-        playerRB = player.GetComponent<Rigidbody2D>();
+        equipedWeaponHandler = player.GetComponent<EquipedWeaponhandler>();
     }
 
     // Update is called once per frame
@@ -31,13 +26,13 @@ public class FryingPanAttack : MonoBehaviour
         if (!canAttack)
         {
             coolDown -= Time.deltaTime;
-            if (coolDown < 0 )
+            if (coolDown < 0)
             {
                 canAttack = true;
                 coolDown = 1.5f;
             }
         }
-        
+
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -51,22 +46,21 @@ public class FryingPanAttack : MonoBehaviour
             enemyHpHandler.takeDamage(damage);
             //  stop multiattacks from occuring
             canAttack = false;
-            //  get enemy rigidbody for knockback
-            enemyRigidbody = collision.gameObject.GetComponent<Rigidbody2D>();
-
-            //  set knockback to scale off of current velocity
-            KnockBack = new  Vector2(playerRB.velocity.x * 7, playerRB.velocity.y * 7);
-            //  add the knockbac force
-
-            enemyRigidbody.velocity = enemyRigidbody.velocity + KnockBack;
-            //enemyRigidbody.AddForce(KnockBack);
-
+            
 
 
         }
 
     }
 
+    public void blowTorchAttackEnd()
+    {
+
+        equipedWeaponHandler.endOfAttack();
+    }
+
+
+  
 
 
 }

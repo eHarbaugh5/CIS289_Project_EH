@@ -788,6 +788,8 @@ GameObject:
   - component: {fileID: 583516527}
   - component: {fileID: 583516529}
   - component: {fileID: 583516528}
+  - component: {fileID: 583516530}
+  - component: {fileID: 583516531}
   m_Layer: 0
   m_Name: BlowTorch
   m_TagString: Untagged
@@ -883,6 +885,65 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &583516530
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 583516526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 033ad7fbf336dbf4390d46f97de2b9a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1537681069}
+  damage: 0.5
+--- !u!61 &583516531
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 583516526}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.00000008940697, y: 0.28810826}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.91, y: 0.91}
+    newSize: {x: 0.91, y: 0.91}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.32123458, y: 0.7645039}
+  m_EdgeRadius: 0
 --- !u!1001 &673447534
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4855,6 +4916,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5489757a836ba74c9b7ad30ff2b9170, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  coolDownTime: 0.5
 --- !u!114 &1537681071
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5103,9 +5165,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.0017989576, y: 0.18174484}
+  m_Offset: {x: -0.0017989576, y: 0.28817907}
   serializedVersion: 2
-  m_Radius: 0.25870797
+  m_Radius: 0.3651422
 --- !u!4 &1793401024 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4962025845980425398, guid: 5d93a9297c74539498045c1ee5b86e86, type: 3}
