@@ -41,14 +41,14 @@ public class PlayerMovement : MonoBehaviour
         playerRB.AddForce(moveInput);
         //playerRB.velocity = moveInput;
 
-        //playerRB.velocity.x + 
-        //playerRB.velocity.y +
     }
 
 
     void playerRotationHandler()
     {
-        if (equipedWeaponHandler.getCanChangeWeapon())
+
+        //equipedWeaponHandler.getCanChangeWeapon()
+        if (true)
         {
             if (inputVertical != 0 && inputHorizontal != 0)
             {

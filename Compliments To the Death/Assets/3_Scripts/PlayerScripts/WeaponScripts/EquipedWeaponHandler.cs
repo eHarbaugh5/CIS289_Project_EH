@@ -12,6 +12,7 @@ public class EquipedWeaponhandler : MonoBehaviour
 
     private Animator animator;
     private Rigidbody2D playerRB;
+    private GameObject player;
 
 
 
@@ -25,22 +26,24 @@ public class EquipedWeaponhandler : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //  components and childs
         animator = GetComponent<Animator>();
+        player = this.transform.GetChild(0).gameObject;
         playerRB = GetComponent<Rigidbody2D>();
 
         //  initial
         canChangeWeapon = true;
-        coolDownTime = 0.4f;
+        coolDownTime = 1.5f;
         coolDown = coolDownTime;
-        
+
 
         //isAttacking = false;
 
         //  get weapons
-        FryingPan = this.transform.GetChild(1).gameObject;
+        FryingPan = this.transform.GetChild(0).gameObject.transform.GetChild(0).gameObject;
         currentWeapon = FryingPan.name;
-        BlowTorch = this.transform.GetChild(2).gameObject;
-        Tongs = this.transform.GetChild(3).gameObject;
+        BlowTorch = this.transform.GetChild(0).gameObject.transform.GetChild(1).gameObject;
+        Tongs = this.transform.GetChild(0).gameObject.transform.GetChild(2).gameObject;
 
         //  disable non initial weapons
         BlowTorch.SetActive(false);
@@ -51,11 +54,13 @@ public class EquipedWeaponhandler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        //  check for attack
         attackWithCurrentWeapon();
+        //  check for swap
         checkForWeaponSwap();
 
-        if (!canChangeWeapon) 
+        //  after attack reset attack based on cooldown
+        if (!canChangeWeapon)
         {
             coolDown -= Time.deltaTime;
         }
@@ -64,7 +69,7 @@ public class EquipedWeaponhandler : MonoBehaviour
             canChangeWeapon = true;
             coolDown = coolDownTime;
         }
-        
+
     }
 
     private void checkForWeaponSwap()
@@ -89,6 +94,7 @@ public class EquipedWeaponhandler : MonoBehaviour
 
     }
 
+    //  updates current weapon when a weapon change occurs
     private void updateCurrentWeapon(int weapon)
     {
 
@@ -116,12 +122,11 @@ public class EquipedWeaponhandler : MonoBehaviour
             Tongs.SetActive(true);
         }
 
-        //canChangeWeapon = true;
-
 
 
     }
 
+    //  if space is pressed and weapoon can be changed, initate attack animation
     private void attackWithCurrentWeapon()
     {
         
@@ -133,12 +138,18 @@ public class EquipedWeaponhandler : MonoBehaviour
 
             if (currentWeapon == "FryingPan")
             {
+               // Debug.Log("FryingPan");
 
-                float speed = 27f;
+                //animator = player.transform.GetChild(0).gameObject.GetComponent<Animator>();
+                animator = player.GetComponent<Animator>();
+
+                animator.SetBool("FryingPanIsAttacking", true);
+
+                /*float speed = 27f;
                 
                 var impulse = (360 * Mathf.Deg2Rad) * speed;
 
-                playerRB.AddTorque(impulse, ForceMode2D.Impulse);
+                playerRB.AddTorque(impulse, ForceMode2D.Impulse);*/
 
 
                 
@@ -147,7 +158,8 @@ public class EquipedWeaponhandler : MonoBehaviour
             else if (currentWeapon == "BlowTorch")
             {
 
-                animator = this.gameObject.transform.GetChild(2).gameObject.GetComponent<Animator>();
+               // Debug.Log("blowtorch");
+                animator = player.transform.GetChild(1).gameObject.GetComponent<Animator>();
 
                 animator.SetBool("BlowTorchIsAttacking", true);
 
@@ -158,6 +170,7 @@ public class EquipedWeaponhandler : MonoBehaviour
 
     }
 
+    //  Attack Ends -- Animation calls this to reset bools
     public void endOfAttack()
     {
         if (currentWeapon == "FryingPan")
@@ -172,7 +185,6 @@ public class EquipedWeaponhandler : MonoBehaviour
        
         canChangeWeapon = true;
 
-        //animator.enabled = false;
 
     }
 
