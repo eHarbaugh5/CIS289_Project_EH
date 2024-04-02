@@ -7,6 +7,10 @@ public class PlayerMovement : MonoBehaviour
 {
 
     private Rigidbody2D playerRB;
+    private EquipedWeaponhandler equipedWeaponHandler;
+
+
+
     public float movementSpeed;
     private float inputHorizontal;
     private float inputVertical;
@@ -16,71 +20,85 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         playerRB = GetComponent<Rigidbody2D>();
+        equipedWeaponHandler = GetComponent<EquipedWeaponhandler>();
+        
     }
 
     // Update is called once per frame
     void Update()
     {
         playerMovementHandler();
+        
+
     }
 
-    void playerMovementHandler()
+    private void playerMovementHandler()
     {
         inputHorizontal = Input.GetAxisRaw("Horizontal");
         inputVertical = Input.GetAxisRaw("Vertical");
         playerRotationHandler();
         moveInput = new Vector2(inputHorizontal * movementSpeed, inputVertical * movementSpeed);
         playerRB.AddForce(moveInput);
+        //playerRB.velocity = moveInput;
+
+        //playerRB.velocity.x + 
+        //playerRB.velocity.y +
     }
+
 
     void playerRotationHandler()
     {
-        if (inputVertical != 0 && inputHorizontal != 0)
+        if (equipedWeaponHandler.getCanChangeWeapon())
         {
-            //  Up + Right
-            if (inputVertical == 1f && inputHorizontal == 1)
+            if (inputVertical != 0 && inputHorizontal != 0)
             {
-                playerRB.rotation = -45f;
+                //  Up + Right
+                if (inputVertical == 1f && inputHorizontal == 1)
+                {
+                    playerRB.rotation = -45f;
+                }
+                //  Down + Right
+                else if (inputVertical == -1f && inputHorizontal == 1)
+                {
+                    playerRB.rotation = -135f;
+                }
+                //  Down + left
+                else if (inputVertical == -1f && inputHorizontal == -1)
+                {
+                    playerRB.rotation = 135f;
+                }
+                //  Up + Left
+                else if (inputVertical == 1f && inputHorizontal == -1)
+                {
+                    playerRB.rotation = 45f;
+                }
             }
-            //  Down + Right
-            else if (inputVertical == -1f && inputHorizontal == 1)
+            else
             {
-                playerRB.rotation = -135f;
-            }
-            //  Down + left
-            else if (inputVertical == -1f && inputHorizontal == -1)
-            {
-                playerRB.rotation = 135f;
-            }
-            //  Up + Left
-            else if (inputVertical == 1f && inputHorizontal == -1)
-            {
-                playerRB.rotation = 45f;
+                //  Up
+                if (inputVertical == 1f && inputHorizontal == 0)
+                {
+                    playerRB.rotation = 0f;
+                }
+                //  Down
+                else if (inputVertical == -1f && inputHorizontal == 0)
+                {
+                    playerRB.rotation = 180f;
+                }
+                //  Left
+                else if (inputHorizontal == -1f && inputVertical == 0)
+                {
+                    playerRB.rotation = 90f;
+                }
+                //  Right
+                else if (inputHorizontal == 1f && inputVertical == 0)
+                {
+                    playerRB.rotation = -90f;
+                }
             }
         }
-        else
-        {
-            //  Up
-            if (inputVertical == 1f && inputHorizontal == 0)
-            {
-                playerRB.rotation = 0f;
-            }
-            //  Down
-            else if (inputVertical == -1f && inputHorizontal == 0)
-            {
-                playerRB.rotation = 180f;
-            }
-            //  Left
-            else if (inputHorizontal == -1f && inputVertical == 0)
-            {
-                playerRB.rotation = 90f;
-            }
-            //  Right
-            else if (inputHorizontal == 1f && inputVertical == 0)
-            {
-                playerRB.rotation = -90f;
-            }
-        }
+
+        
         
         
         
@@ -90,5 +108,8 @@ public class PlayerMovement : MonoBehaviour
 
 
     }
+
+
+    
 
 }
