@@ -11,7 +11,7 @@ public class basicEnemyAi : MonoBehaviour
     private float distance;
     public float activeDistance;
 
-    public float AttackCooldown;
+    private float AttackCooldown;
 
 
     // Start is called before the first frame update

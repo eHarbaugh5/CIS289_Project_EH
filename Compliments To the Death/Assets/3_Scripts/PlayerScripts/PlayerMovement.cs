@@ -38,6 +38,7 @@ public class PlayerMovement : MonoBehaviour
         inputVertical = Input.GetAxisRaw("Vertical");
         playerRotationHandler();
         moveInput = new Vector2(inputHorizontal * movementSpeed, inputVertical * movementSpeed);
+        Physics2D.IgnoreLayerCollision(10, 15);
         playerRB.AddForce(moveInput);
         //playerRB.velocity = moveInput;
 

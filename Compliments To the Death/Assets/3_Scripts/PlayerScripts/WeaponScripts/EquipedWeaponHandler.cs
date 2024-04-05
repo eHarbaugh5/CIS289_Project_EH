@@ -11,10 +11,7 @@ public class EquipedWeaponhandler : MonoBehaviour
     private GameObject Tongs;
 
     private Animator animator;
-    private Rigidbody2D playerRB;
     private GameObject player;
-
-
 
     private string currentWeapon;
     private float coolDown;
@@ -29,11 +26,9 @@ public class EquipedWeaponhandler : MonoBehaviour
         //  components and childs
         animator = GetComponent<Animator>();
         player = this.transform.GetChild(0).gameObject;
-        playerRB = GetComponent<Rigidbody2D>();
 
         //  initial
         canChangeWeapon = true;
-        coolDownTime = 1.5f;
         coolDown = coolDownTime;
 
 
@@ -64,7 +59,7 @@ public class EquipedWeaponhandler : MonoBehaviour
         {
             coolDown -= Time.deltaTime;
         }
-        if (coolDown < 0)
+        if (coolDown <= 0)
         {
             canChangeWeapon = true;
             coolDown = coolDownTime;
@@ -133,26 +128,15 @@ public class EquipedWeaponhandler : MonoBehaviour
 
         if (Input.GetKeyDown("space") && canChangeWeapon)
         {
-            //animator.enabled = true;
             canChangeWeapon = false;
 
             if (currentWeapon == "FryingPan")
             {
-               // Debug.Log("FryingPan");
 
-                //animator = player.transform.GetChild(0).gameObject.GetComponent<Animator>();
                 animator = player.GetComponent<Animator>();
 
                 animator.SetBool("FryingPanIsAttacking", true);
 
-                /*float speed = 27f;
-                
-                var impulse = (360 * Mathf.Deg2Rad) * speed;
-
-                playerRB.AddTorque(impulse, ForceMode2D.Impulse);*/
-
-
-                
 
             }
             else if (currentWeapon == "BlowTorch")

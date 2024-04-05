@@ -2,14 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class FryingPanAttack : MonoBehaviour
 {
 
     private EnemyHpHandler enemyHpHandler;
     private Rigidbody2D enemyRigidbody;
+    private CircleCollider2D panCollider;
 
     public GameObject player;
+    private GameObject rock;
     private Rigidbody2D playerRB;
     private Vector2 KnockBack;
 
@@ -22,7 +25,21 @@ public class FryingPanAttack : MonoBehaviour
     {
         canAttack = true;
         coolDown = 1.5f;
+
+        //  player rigidbody
         playerRB = player.GetComponent<Rigidbody2D>();
+        //  pan colider ignore
+        panCollider = GetComponent<CircleCollider2D>();
+
+        rock = GameObject.FindWithTag("Respawn");
+
+
+        //Physics2D.IgnoreCollision(panCollider, rock.GetComponent<BoxCollider2D>());
+
+        
+        
+
+        
     }
 
     // Update is called once per frame
