@@ -9,10 +9,8 @@ public class FryingPanAttack : MonoBehaviour
 
     private EnemyHpHandler enemyHpHandler;
     private Rigidbody2D enemyRigidbody;
-    private CircleCollider2D panCollider;
 
     public GameObject player;
-    private GameObject rock;
     private Rigidbody2D playerRB;
     private Vector2 KnockBack;
 
@@ -28,23 +26,17 @@ public class FryingPanAttack : MonoBehaviour
 
         //  player rigidbody
         playerRB = player.GetComponent<Rigidbody2D>();
-        //  pan colider ignore
-        panCollider = GetComponent<CircleCollider2D>();
 
-        rock = GameObject.FindWithTag("Respawn");
+        Physics2D.IgnoreLayerCollision(10, 6);
 
 
-        //Physics2D.IgnoreCollision(panCollider, rock.GetComponent<BoxCollider2D>());
 
-        
-        
-
-        
     }
 
     // Update is called once per frame
     void Update()
     {
+        
         if (!canAttack)
         {
             coolDown -= Time.deltaTime;
