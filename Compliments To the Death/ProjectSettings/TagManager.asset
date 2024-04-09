@@ -8,6 +8,7 @@ TagManager:
   - Enemy
   - PlayerHitBox
   - TileMapCollider
+  - GrassProp
   layers:
   - Default
   - TransparentFX

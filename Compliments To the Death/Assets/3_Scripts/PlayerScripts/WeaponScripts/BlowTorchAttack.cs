@@ -6,27 +6,31 @@ public class BlowTorchAttack : MonoBehaviour
 {
     private EnemyHpHandler enemyHpHandler;
     private EquipedWeaponhandler equipedWeaponHandler;
+    private Collider2D blowTorchAttackCollider;
     public GameObject player;
     private Animator animator;
 
     public float fireDamage;
-    private bool canAttack;
+    //private bool canAttack;
     public float maxCoolDown;
-    private float coolDown;
+    //private float coolDown;
 
     // Start is called before the first frame update
     void Start()
     {
-        canAttack = true;
-        coolDown = maxCoolDown;
+        //canAttack = true;
+        //coolDown = maxCoolDown;
         equipedWeaponHandler = player.GetComponent<EquipedWeaponhandler>();
         animator = GetComponent<Animator>();
+        blowTorchAttackCollider = GetComponent<Collider2D>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!canAttack)
+
+        //  old cooldown
+        /*if (!canAttack)
         {
             coolDown -= Time.deltaTime;
             if (coolDown < 0)
@@ -34,7 +38,8 @@ public class BlowTorchAttack : MonoBehaviour
                 canAttack = true;
                 coolDown = maxCoolDown;
             }
-        }
+        }*/
+        
 
 
 
@@ -56,9 +61,16 @@ public class BlowTorchAttack : MonoBehaviour
                 enemyHpHandler.takeDamage(fireDamage);
                 enemyHpHandler.setOnFire();
                 //  stop multiattacks from occuring
-                canAttack = false;
+                //canAttack = false;
 
 
+
+            }
+
+            if (collision.CompareTag("GrassProp"))
+            {
+
+                collision.gameObject.GetComponent<GrassFireSpread>().setGrassOnFire();
 
             }
         }
