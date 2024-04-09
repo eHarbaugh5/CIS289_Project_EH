@@ -7,6 +7,7 @@ public class EquipedWeaponhandler : MonoBehaviour
 {
 
     private GameObject FryingPan;
+    private FryingPanAttack fryingPanAttackSc;
     private GameObject BlowTorch;
     private GameObject Tongs;
 
@@ -36,6 +37,7 @@ public class EquipedWeaponhandler : MonoBehaviour
 
         //  get weapons
         FryingPan = this.transform.GetChild(0).gameObject.transform.GetChild(0).gameObject;
+        fryingPanAttackSc = FryingPan.GetComponent<FryingPanAttack>();
         currentWeapon = FryingPan.name;
         BlowTorch = this.transform.GetChild(0).gameObject.transform.GetChild(1).gameObject;
         Tongs = this.transform.GetChild(0).gameObject.transform.GetChild(2).gameObject;
@@ -63,6 +65,7 @@ public class EquipedWeaponhandler : MonoBehaviour
         {
             canChangeWeapon = true;
             coolDown = coolDownTime;
+            fryingPanAttackSc.setHitOnCoolDown(false);
         }
 
     }

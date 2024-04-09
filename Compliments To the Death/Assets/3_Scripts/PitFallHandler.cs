@@ -23,15 +23,16 @@ public class PitFallHandler : MonoBehaviour
 
         if (collision.transform.CompareTag("Enemy"))
         {
-
+            Debug.Log(collision.transform.name + " Has fallen to their death");
             Destroy(collision.gameObject);
+
 
         }
 
         if (collision.transform.CompareTag("Player"))
         {
             Debug.Log("Player Has Died");
-            SceneManager.LoadScene("DemoScene");
+            SceneManager.LoadScene("LevelOne");
         }
 
     }

@@ -10,6 +10,8 @@ public class FryingPanAttack : MonoBehaviour
     private EnemyHpHandler enemyHpHandler;
     private Rigidbody2D enemyRigidbody;
 
+    private bool hitOnCooldown;
+
     public GameObject player;
     private Rigidbody2D playerRB;
     private Vector2 KnockBack;
@@ -23,6 +25,7 @@ public class FryingPanAttack : MonoBehaviour
     {
         canAttack = true;
         coolDown = 1.5f;
+        hitOnCooldown = false;
 
         //  player rigidbody
         playerRB = player.GetComponent<Rigidbody2D>();
@@ -57,7 +60,11 @@ public class FryingPanAttack : MonoBehaviour
             //  get hp handler script from enemy
             enemyHpHandler = collision.gameObject.GetComponent<EnemyHpHandler>();
             //  execute the damage function
-            enemyHpHandler.takeDamage(damage);
+            if (!hitOnCooldown)
+            {
+                enemyHpHandler.takeDamage(damage);
+            }
+            
             //  stop multiattacks from occuring
             canAttack = false;
             //  get enemy rigidbody for knockback
@@ -70,10 +77,17 @@ public class FryingPanAttack : MonoBehaviour
             enemyRigidbody.velocity = KnockBack;
             //enemyRigidbody.AddForce(KnockBack);
 
+            hitOnCooldown = true;
+
 
 
         }
 
+    }
+
+    public void setHitOnCoolDown(bool h)
+    {
+        hitOnCooldown = h;
     }
 
 

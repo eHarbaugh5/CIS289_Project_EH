@@ -32,14 +32,14 @@ public class GameManagerScript : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.R))
         {
 
-            SceneManager.LoadScene("DemoScene");
+            SceneManager.LoadScene("LevelOne");
 
         }
 
         if (Input.GetKeyUp(KeyCode.P))
         {
 
-            SceneManager.LoadScene("SampleScene");
+            SceneManager.LoadScene("DemoScene");
 
         }
 

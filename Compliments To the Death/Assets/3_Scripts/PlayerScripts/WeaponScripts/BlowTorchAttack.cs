@@ -45,7 +45,7 @@ public class BlowTorchAttack : MonoBehaviour
     {
 
         // bool check
-        if (animator.GetBool("blowTorchIsAttacking"))
+        if (animator.GetBool("BlowTorchIsAttacking"))
         {
             if (collision.transform.CompareTag("Enemy"))
             {

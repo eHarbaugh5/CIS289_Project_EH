@@ -9,6 +9,10 @@ public class EnemyHpHandler : MonoBehaviour
     public float maxHp;
     public float currentHp;
 
+
+    //  Fire
+    private SpriteRenderer fireSprite;
+    private Animator fireAnimator;
     private bool isOnFire;
     public float fireDamage;
     public float maxFireBurnTime;
@@ -22,6 +26,8 @@ public class EnemyHpHandler : MonoBehaviour
         currentHp = maxHp;
         fireBurnTime = maxFireBurnTime;
         isOnFire = false;
+        fireSprite = transform.GetChild(0).GetComponent<SpriteRenderer>();
+        fireAnimator = transform.GetChild(0).GetComponent<Animator>();
 
     }
 
@@ -30,7 +36,8 @@ public class EnemyHpHandler : MonoBehaviour
     {
         if (isOnFire)
         {
-        
+            fireSprite.enabled = true;
+            fireAnimator.enabled = true;
             currentHp -= fireDamage * Time.deltaTime;
             fireBurnTime -= Time.deltaTime;
 
@@ -39,14 +46,17 @@ public class EnemyHpHandler : MonoBehaviour
                 isOnFire = false;
                 fireBurnTime = maxFireBurnTime;
                 //  update fire sprite status
+                fireSprite.enabled = false;
+                fireAnimator.enabled = false;
             }
 
         }
 
-        if (currentHp < 0)
+
+        if (currentHp <= 0)
         {
             //  die
-            Debug.Log("Enemy Has Died");
+            Debug.Log(this.gameObject.transform.name + " Has been Slayen");
             Destroy(this.gameObject);
 
         }
