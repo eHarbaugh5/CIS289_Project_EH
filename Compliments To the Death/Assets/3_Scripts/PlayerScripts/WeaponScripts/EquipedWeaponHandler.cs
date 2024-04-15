@@ -15,6 +15,7 @@ public class EquipedWeaponhandler : MonoBehaviour
     private GameObject player;
 
     private string currentWeapon;
+    private int currentWeaponIndex;
     private float coolDown;
     public float coolDownTime;
 
@@ -39,6 +40,7 @@ public class EquipedWeaponhandler : MonoBehaviour
         FryingPan = this.transform.GetChild(0).gameObject.transform.GetChild(0).gameObject;
         fryingPanAttackSc = FryingPan.GetComponent<FryingPanAttack>();
         currentWeapon = FryingPan.name;
+        currentWeaponIndex = 0;
         BlowTorch = this.transform.GetChild(0).gameObject.transform.GetChild(1).gameObject;
         Tongs = this.transform.GetChild(0).gameObject.transform.GetChild(2).gameObject;
 
@@ -56,17 +58,6 @@ public class EquipedWeaponhandler : MonoBehaviour
         //  check for swap
         checkForWeaponSwap();
 
-        //  after attack reset attack based on cooldown
-        if (!canChangeWeapon)
-        {
-            coolDown -= Time.deltaTime;
-        }
-        if (coolDown <= 0)
-        {
-            canChangeWeapon = true;
-            coolDown = coolDownTime;
-            fryingPanAttackSc.setHitOnCoolDown(false);
-        }
 
     }
 
@@ -74,21 +65,18 @@ public class EquipedWeaponhandler : MonoBehaviour
     {
 
         //  swaps weapons based on key press
-        if (Input.GetKeyDown(KeyCode.B) && canChangeWeapon)
+        if (Input.GetKeyDown(KeyCode.Q) && canChangeWeapon)
         {
-            canChangeWeapon = false;
-            updateCurrentWeapon(0);
+            //canChangeWeapon = false;
+            
+            currentWeaponIndex++;
+            if (currentWeaponIndex >= 3)
+            {
+                currentWeaponIndex = 0;
+            }
+            updateCurrentWeapon(currentWeaponIndex);
         }
-        if (Input.GetKeyDown(KeyCode.N) && canChangeWeapon)
-        {
-            canChangeWeapon = false;
-            updateCurrentWeapon(1);
-        }
-        if (Input.GetKeyDown(KeyCode.M) && canChangeWeapon)
-        {
-            canChangeWeapon = false;
-            updateCurrentWeapon(2);
-        }
+
 
     }
 
@@ -96,6 +84,7 @@ public class EquipedWeaponhandler : MonoBehaviour
     private void updateCurrentWeapon(int weapon)
     {
 
+        
 
         //  disable all
         FryingPan.SetActive(false);
@@ -105,8 +94,9 @@ public class EquipedWeaponhandler : MonoBehaviour
         //  enable current
         if (weapon == 0)
         {
-            FryingPan.SetActive(true);
             currentWeapon = FryingPan.name;
+            FryingPan.SetActive(true);
+            
 
         }
         else if (weapon == 1)
@@ -152,6 +142,12 @@ public class EquipedWeaponhandler : MonoBehaviour
 
 
             }
+            else if (currentWeapon == "Tongs")
+            {
+                animator = player.transform.GetChild(2).gameObject.GetComponent<Animator>();
+
+                animator.SetBool("TongsIsAttacking", true);
+            }
 
         }
 
@@ -168,8 +164,13 @@ public class EquipedWeaponhandler : MonoBehaviour
         {
             animator.SetBool("BlowTorchIsAttacking", false);
         }
-        
-       
+        else if (currentWeapon == "Tongs")
+        {
+            animator.SetBool("TongsIsAttacking", false);
+        }
+
+
+        coolDown = coolDownTime;
         canChangeWeapon = true;
 
 

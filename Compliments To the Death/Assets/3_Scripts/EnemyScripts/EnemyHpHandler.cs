@@ -18,6 +18,7 @@ public class EnemyHpHandler : MonoBehaviour
     public float maxFireBurnTime;
     private float fireBurnTime;
     public bool isBurnable;
+    public bool isFlying;
 
 
     // Start is called before the first frame update
@@ -80,6 +81,11 @@ public class EnemyHpHandler : MonoBehaviour
         }
         
 
+    }
+
+    public bool getIsFlying()
+    {
+        return isFlying;
     }
 
 

@@ -29,7 +29,7 @@ public class GameManagerScript : MonoBehaviour
         }
 
 
-        if (Input.GetKeyUp(KeyCode.R))
+        if (Input.GetKeyUp(KeyCode.L))
         {
 
             SceneManager.LoadScene("LevelOne");

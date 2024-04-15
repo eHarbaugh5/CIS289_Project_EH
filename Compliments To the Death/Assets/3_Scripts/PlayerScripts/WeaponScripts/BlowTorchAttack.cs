@@ -11,38 +11,15 @@ public class BlowTorchAttack : MonoBehaviour
     private Animator animator;
 
     public float fireDamage;
-    //private bool canAttack;
     public float maxCoolDown;
-    //private float coolDown;
+
 
     // Start is called before the first frame update
     void Start()
     {
-        //canAttack = true;
-        //coolDown = maxCoolDown;
         equipedWeaponHandler = player.GetComponent<EquipedWeaponhandler>();
         animator = GetComponent<Animator>();
         blowTorchAttackCollider = GetComponent<Collider2D>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-        //  old cooldown
-        /*if (!canAttack)
-        {
-            coolDown -= Time.deltaTime;
-            if (coolDown < 0)
-            {
-                canAttack = true;
-                coolDown = maxCoolDown;
-            }
-        }*/
-        
-
-
-
     }
 
 

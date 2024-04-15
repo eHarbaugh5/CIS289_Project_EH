@@ -17,13 +17,12 @@ public class FryingPanAttack : MonoBehaviour
     private Vector2 KnockBack;
 
     public float damage;
-    private bool canAttack;
     private float coolDown;
 
     // Start is called before the first frame update
     void Start()
     {
-        canAttack = true;
+        //canAttack = true;
         coolDown = 1.5f;
         hitOnCooldown = false;
 
@@ -40,12 +39,13 @@ public class FryingPanAttack : MonoBehaviour
     void Update()
     {
         
-        if (!canAttack)
+        if (hitOnCooldown)
         {
             coolDown -= Time.deltaTime;
-            if (coolDown < 0 )
+            if (coolDown <= 0 )
             {
-                canAttack = true;
+
+                hitOnCooldown = false;
                 coolDown = 1.5f;
             }
         }
@@ -65,8 +65,7 @@ public class FryingPanAttack : MonoBehaviour
                 enemyHpHandler.takeDamage(damage);
             }
             
-            //  stop multiattacks from occuring
-            canAttack = false;
+
             //  get enemy rigidbody for knockback
             enemyRigidbody = collision.gameObject.GetComponent<Rigidbody2D>();
 

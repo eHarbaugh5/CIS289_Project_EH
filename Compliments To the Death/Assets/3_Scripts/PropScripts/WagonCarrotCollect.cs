@@ -47,7 +47,10 @@ public class WagonCarrotCollect : MonoBehaviour
         transform.localPosition = new Vector2(wagonSpotX, wagonSpotY);
     }
 
-
+    public bool getIsCollected()
+    {
+        return isCollected;
+    }
 
 
 

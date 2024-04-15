@@ -13,18 +13,19 @@ public class PitFallHandler : MonoBehaviour
 
 
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        
-    }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
 
         if (collision.transform.CompareTag("Enemy"))
         {
-            Debug.Log(collision.transform.name + " Has fallen to their death");
-            Destroy(collision.gameObject);
+
+            if (!collision.gameObject.GetComponent<EnemyHpHandler>().getIsFlying())
+            {
+                Debug.Log(collision.transform.name + " Has fallen to their death");
+                Destroy(collision.gameObject);
+            }
+
+            
 
 
         }

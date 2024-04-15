@@ -11,13 +11,15 @@ public class basicEnemyAi : MonoBehaviour
     private float distance;
     public float activeDistance;
 
-    private float AttackCooldown;
+    private float attackCooldown;
+    public float maxAttackCooldown;
 
 
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.FindWithTag("Player");
+        attackCooldown = maxAttackCooldown;
     }
 
     // Update is called once per frame
@@ -38,7 +40,7 @@ public class basicEnemyAi : MonoBehaviour
     void enemyActive()
     {
         //  dont move if on attack cooldown
-        if (AttackCooldown <= 0)
+        if (attackCooldown <= 0)
         {
             //  get direction of player
             Vector2 direction = player.transform.position - transform.position;
@@ -52,9 +54,9 @@ public class basicEnemyAi : MonoBehaviour
             //  simple movement to the player
             transform.position = Vector2.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
         }
-        else if (AttackCooldown > 0)
+        else if (attackCooldown > 0)
         {
-            AttackCooldown -= Time.deltaTime;
+            attackCooldown -= Time.deltaTime;
         }
         
 
@@ -63,16 +65,10 @@ public class basicEnemyAi : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         
-        /*if (collision.transform.CompareTag("PlayerHitBox"))
-        {
-            Debug.Log("hitbox");
-            AttackCooldown = 1.25f;
-
-        }*/
         if (collision.transform.CompareTag("Player"))
         {
             //Debug.Log("Player hit");
-            AttackCooldown = 1.25f;
+            attackCooldown = maxAttackCooldown;
         }
        // Debug.Log(collision.transform.tag);
 

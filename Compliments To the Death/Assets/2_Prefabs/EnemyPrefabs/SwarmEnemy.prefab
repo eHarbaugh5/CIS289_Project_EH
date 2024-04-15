@@ -104,6 +104,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 4.5
   activeDistance: 6
+  maxAttackCooldown: 0.75
 --- !u!114 &170010453751574281
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -121,6 +122,7 @@ MonoBehaviour:
   fireDamage: 3.5
   maxFireBurnTime: 10
   isBurnable: 1
+  isFlying: 1
 --- !u!58 &1216145252886292588
 CircleCollider2D:
   m_ObjectHideFlags: 0
