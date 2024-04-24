@@ -47,8 +47,7 @@ public class PlayerMovement : MonoBehaviour
     void playerRotationHandler()
     {
 
-        //equipedWeaponHandler.getCanChangeWeapon()
-        if (true)
+        if (equipedWeaponHandler.getCanChangeWeapon())
         {
             if (inputVertical != 0 && inputHorizontal != 0)
             {

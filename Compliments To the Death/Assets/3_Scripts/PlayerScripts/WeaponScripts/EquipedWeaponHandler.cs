@@ -67,7 +67,6 @@ public class EquipedWeaponhandler : MonoBehaviour
         //  swaps weapons based on key press
         if (Input.GetKeyDown(KeyCode.Q) && canChangeWeapon)
         {
-            //canChangeWeapon = false;
             
             currentWeaponIndex++;
             if (currentWeaponIndex >= 3)

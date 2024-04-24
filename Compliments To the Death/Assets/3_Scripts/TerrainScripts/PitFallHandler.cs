@@ -21,8 +21,14 @@ public class PitFallHandler : MonoBehaviour
 
             if (!collision.gameObject.GetComponent<EnemyHpHandler>().getIsFlying())
             {
-                Debug.Log(collision.transform.name + " Has fallen to their death");
-                Destroy(collision.gameObject);
+
+                //  activate animator that will kill them
+
+                collision.transform.GetComponent<EnemyHpHandler>().fallInPit();
+
+                // Old prior to animation
+                //Debug.Log(collision.transform.name + " Has fallen to their death");
+                //Destroy(collision.gameObject);
             }
 
             

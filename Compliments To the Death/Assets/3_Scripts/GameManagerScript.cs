@@ -17,9 +17,31 @@ public class GameManagerScript : MonoBehaviour
         MainCamera = GameObject.FindWithTag("MainCamera");
     }
 
+
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        //  in new scene grabs player and main camera
+
+        Player = GameObject.FindWithTag("Player");
+        MainCamera = GameObject.FindWithTag("MainCamera");
+
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+
     // Update is called once per frame
     void Update()
     {
+        
         MainCamera.transform.position = new Vector3 (Player.transform.position.x, Player.transform.position.y, MainCamera.transform.position.z);
 
 
@@ -29,7 +51,7 @@ public class GameManagerScript : MonoBehaviour
         }
 
 
-        if (Input.GetKeyUp(KeyCode.L))
+        if (Input.GetKeyUp(KeyCode.O))
         {
 
             SceneManager.LoadScene("LevelOne");
@@ -39,9 +61,28 @@ public class GameManagerScript : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.P))
         {
 
-            SceneManager.LoadScene("DemoScene");
+            SceneManager.LoadScene("LevelTwo");
+
+        }
+
+        if (Input.GetKeyUp(KeyCode.T))
+        {
+
+            SceneManager.LoadScene("TrailerScene");
+
+        }
+
+
+        if (Input.GetKeyUp(KeyCode.M))
+        {
+
+            SceneManager.LoadScene("MainMenu");
 
         }
 
     }
+
+
+
+
 }

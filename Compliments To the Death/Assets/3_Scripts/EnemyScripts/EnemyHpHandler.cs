@@ -12,6 +12,7 @@ public class EnemyHpHandler : MonoBehaviour
 
     //  Fire
     private SpriteRenderer fireSprite;
+    private Animator pitFallAnimator;
     private Animator fireAnimator;
     private bool isOnFire;
     public float fireDamage;
@@ -29,6 +30,7 @@ public class EnemyHpHandler : MonoBehaviour
         isOnFire = false;
         fireSprite = transform.GetChild(0).GetComponent<SpriteRenderer>();
         fireAnimator = transform.GetChild(0).GetComponent<Animator>();
+        pitFallAnimator = transform.GetComponent<Animator>();
 
     }
 
@@ -87,6 +89,29 @@ public class EnemyHpHandler : MonoBehaviour
     {
         return isFlying;
     }
+
+    //  called by pit fall collision
+    public void fallInPit()
+    {
+
+        if (!isFlying)
+        {
+
+            pitFallAnimator.enabled = true;
+
+
+        }
+
+    }
+
+    //  end of pitfall animation, will remove enemy
+    public void removeEnemy()
+    {
+        Destroy(this.gameObject);
+    }
+
+
+
 
 
 }

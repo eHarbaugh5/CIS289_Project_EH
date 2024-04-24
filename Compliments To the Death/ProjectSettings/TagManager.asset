@@ -9,6 +9,7 @@ TagManager:
   - PlayerHitBox
   - TileMapCollider
   - GrassProp
+  - DontDestroyOnLoad
   layers:
   - Default
   - TransparentFX
