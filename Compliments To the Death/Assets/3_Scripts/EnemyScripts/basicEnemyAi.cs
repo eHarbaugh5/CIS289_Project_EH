@@ -19,7 +19,8 @@ public class basicEnemyAi : MonoBehaviour
     void Start()
     {
         player = GameObject.FindWithTag("Player");
-        attackCooldown = maxAttackCooldown;
+        //attackCooldown = maxAttackCooldown;
+        attackCooldown = 0;
     }
 
     // Update is called once per frame
