@@ -15,6 +15,7 @@ public class FryingPanAttack : MonoBehaviour
     public GameObject player;
     private Rigidbody2D playerRB;
     private Vector2 KnockBack;
+    public float knockBackStrength;
 
     public float damage;
     private float coolDown;
@@ -69,11 +70,14 @@ public class FryingPanAttack : MonoBehaviour
             //  get enemy rigidbody for knockback
             enemyRigidbody = collision.gameObject.GetComponent<Rigidbody2D>();
 
+            Vector2 knockBack = (collision.transform.position - player.transform.position).normalized;
+            enemyRigidbody.AddForce(knockBack*knockBackStrength, ForceMode2D.Impulse);
+
             //  set knockback to scale off of current velocity
-            KnockBack = new  Vector2(playerRB.velocity.x * 7, playerRB.velocity.y * 7);
+            //KnockBack = new  Vector2(playerRB.velocity.x * 7, playerRB.velocity.y * 7);
             //  add the knockbac force
 
-            enemyRigidbody.velocity = KnockBack;
+            //enemyRigidbody.velocity = KnockBack;
             //enemyRigidbody.AddForce(KnockBack);
 
             hitOnCooldown = true;

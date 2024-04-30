@@ -10,6 +10,7 @@ TagManager:
   - TileMapCollider
   - GrassProp
   - DontDestroyOnLoad
+  - Wagon
   layers:
   - Default
   - TransparentFX

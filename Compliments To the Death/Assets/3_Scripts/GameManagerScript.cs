@@ -21,6 +21,7 @@ public class GameManagerScript : MonoBehaviour
     private void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
+        Application.targetFrameRate = 30;
     }
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)

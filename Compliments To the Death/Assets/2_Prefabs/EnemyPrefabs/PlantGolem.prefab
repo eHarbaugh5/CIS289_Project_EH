@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1067078344343559019}
-  - component: {fileID: 7394807871968193834}
+  - component: {fileID: 7113655996681232494}
   - component: {fileID: 8134640159296423444}
   - component: {fileID: 3849744583810803127}
   - component: {fileID: 780081354122202547}
@@ -38,7 +38,7 @@ Transform:
   - {fileID: 2831641966966548325}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7394807871968193834
+--- !u!114 &7113655996681232494
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -47,10 +47,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 8481894144998502780}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2090b850c573b854a869e27ce06aff2f, type: 3}
+  m_Script: {fileID: 11500000, guid: caefb42abcb16174f91969f6554af6bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2
+  speed: 3
   activeDistance: 8
   maxAttackCooldown: 0.5
 --- !u!114 &8134640159296423444
@@ -170,9 +170,9 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 10
-  m_LinearDrag: 8
-  m_AngularDrag: 8
+  m_Mass: 1
+  m_LinearDrag: 3
+  m_AngularDrag: 5
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
