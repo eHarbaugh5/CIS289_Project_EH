@@ -107,6 +107,7 @@ public class EnemyHpHandler : MonoBehaviour
     //  end of pitfall animation, will remove enemy
     public void removeEnemy()
     {
+
         Destroy(this.gameObject);
     }
 

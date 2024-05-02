@@ -119,6 +119,7 @@ public class LevelTwoAi : MonoBehaviour
 
         if (collision.transform.CompareTag("Wagon"))
         {
+            collision.transform.GetComponent<LevelTwoCompleteScript>().removeCarrot();
             Destroy(this.gameObject);
             //  wagon lose life
         }
