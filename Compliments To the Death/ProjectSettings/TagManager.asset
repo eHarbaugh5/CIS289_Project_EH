@@ -11,6 +11,7 @@ TagManager:
   - GrassProp
   - DontDestroyOnLoad
   - Wagon
+  - JumpLocation
   layers:
   - Default
   - TransparentFX
