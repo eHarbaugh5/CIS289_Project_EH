@@ -10,6 +10,8 @@ public class BossAiScript : MonoBehaviour
     public GameObject[] jumpLocations;
     private int currLocation;
 
+    private Rigidbody2D bossRB;
+
     private float jumpTimer;
     public float maxJumpTimer;
 
@@ -20,10 +22,12 @@ public class BossAiScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        bossRB = GetComponent<Rigidbody2D>();
         bodyCollider = GetComponent<CircleCollider2D>();
         armsCollider = GetComponents<CapsuleCollider2D>();
         jumpTimer = maxJumpTimer;
         currLocation = 0;
+        disableColliders();
 
 
     }
@@ -62,7 +66,6 @@ public class BossAiScript : MonoBehaviour
 
     private void disableColliders()
     {
-
         bodyCollider.enabled = false;
         armsCollider[0].enabled = false;
         armsCollider[1].enabled = false;
@@ -74,7 +77,6 @@ public class BossAiScript : MonoBehaviour
 
     private void enableColliders()
     {
-
         bodyCollider.enabled = true;
         armsCollider[0].enabled = true;
         armsCollider[1].enabled = true;
@@ -89,19 +91,37 @@ public class BossAiScript : MonoBehaviour
 
             if (!canJump)
             {
-
-                enableColliders();
-                canJump = true;
-                currLocation++;
-                jumpTimer = maxJumpTimer;
-                if (currLocation > jumpLocations.Length)
+                if (collision.name == "JumpLocation" + currLocation)
                 {
-                    currLocation = 0;
+                    if (currLocation == 1 || currLocation == 3)
+                    {
+                        bossRB.rotation = 180f;
+                    }
+                    else
+                    {
+                        bossRB.rotation = 0f;
+                    }
+                    enableColliders();
+                    canJump = true;
+                    currLocation++;
+                    jumpTimer = maxJumpTimer;
+                    if (currLocation == jumpLocations.Length)
+                    {
+                        currLocation = 0;
+                    }
                 }
+                else
+                {
+                    Debug.Log(collision.name + "" + currLocation);
+                }
+                
 
             }
+            
+            
 
         }
+       
     }
 
 }

@@ -55,7 +55,7 @@ public class FryingPanAttack : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.transform.CompareTag("Enemy"))
+        if (collision.transform.CompareTag("Enemy") || collision.transform.CompareTag("Boss"))
         {
 
             //  get hp handler script from enemy

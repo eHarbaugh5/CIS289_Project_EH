@@ -13,6 +13,10 @@ public class GameManagerScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (SceneManager.GetActiveScene().name == "LevelThree")
+        {
+            this.gameObject.SetActive(false);
+        }
         Player = GameObject.FindWithTag("Player");
         MainCamera = GameObject.FindWithTag("MainCamera");
     }

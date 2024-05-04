@@ -29,7 +29,7 @@ public class BlowTorchAttack : MonoBehaviour
         // bool check
         if (animator.GetBool("BlowTorchIsAttacking"))
         {
-            if (collision.transform.CompareTag("Enemy"))
+            if (collision.transform.CompareTag("Enemy") || collision.transform.CompareTag("Boss"))
             {
 
                 //  get hp handler script from enemy
