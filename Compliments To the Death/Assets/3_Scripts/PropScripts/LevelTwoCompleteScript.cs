@@ -73,10 +73,10 @@ public class LevelTwoCompleteScript : MonoBehaviour
         for (int i = 0; i < enemies.Length; i++)
         {
 
-        if (enemies[i] != null)
-        {
-            allDead = false;
-        }
+            if (enemies[i] != null)
+            {
+              allDead = false;
+            }
 
         }
 

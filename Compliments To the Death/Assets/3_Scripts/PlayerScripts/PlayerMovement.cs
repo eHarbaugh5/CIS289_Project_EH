@@ -125,7 +125,7 @@ public class PlayerMovement : MonoBehaviour
         {
             playerHp -= d;
             iFrames = maxIFrames;
-            Debug.Log("Hp " + playerHp);
+            //Debug.Log("Hp " + playerHp);
         }
         
 
