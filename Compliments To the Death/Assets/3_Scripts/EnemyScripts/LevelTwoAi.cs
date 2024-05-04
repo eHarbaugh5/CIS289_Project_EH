@@ -111,9 +111,9 @@ public class LevelTwoAi : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
 
-        if (collision.transform.CompareTag("Player"))
+        if (collision.collider.gameObject.CompareTag("Player"))
         {
-            //Debug.Log("Player hit");
+            collision.gameObject.GetComponent<PlayerMovement>().playerHit(1);
             attackCooldown = maxAttackCooldown;
         }
 
@@ -121,7 +121,6 @@ public class LevelTwoAi : MonoBehaviour
         {
             collision.transform.GetComponent<LevelTwoCompleteScript>().removeCarrot();
             Destroy(this.gameObject);
-            //  wagon lose life
         }
 
 

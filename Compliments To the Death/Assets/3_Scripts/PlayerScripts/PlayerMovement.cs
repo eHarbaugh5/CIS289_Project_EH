@@ -9,6 +9,11 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D playerRB;
     private EquipedWeaponhandler equipedWeaponHandler;
 
+    public float playerHp;
+
+    private float iFrames;
+    public float maxIFrames;
+
 
 
     public float movementSpeed;
@@ -28,8 +33,12 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         playerMovementHandler();
+        if(iFrames > 0)
+        {
+            iFrames -= Time.deltaTime;
+        }
         
-
+       
     }
 
     private void playerMovementHandler()
@@ -109,6 +118,18 @@ public class PlayerMovement : MonoBehaviour
     }
 
 
-    
+    public void playerHit(float d)
+    {
+        //  if not on i frames take damage and add them
+        if (iFrames <= 0)
+        {
+            playerHp -= d;
+            iFrames = maxIFrames;
+            Debug.Log("Hp " + playerHp);
+        }
+        
+
+
+    }
 
 }

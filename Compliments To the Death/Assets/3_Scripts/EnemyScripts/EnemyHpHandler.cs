@@ -85,6 +85,11 @@ public class EnemyHpHandler : MonoBehaviour
 
     }
 
+    public bool getOnFire()
+    {
+        return isOnFire;
+    }
+
     public bool getIsFlying()
     {
         return isFlying;

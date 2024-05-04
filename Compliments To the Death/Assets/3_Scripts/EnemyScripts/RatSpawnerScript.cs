@@ -58,8 +58,6 @@ public class RatSpawnerScript : MonoBehaviour
         newRat = Instantiate(ratSwarmEnemy, RSpawn[currSpawn].transform);
         // new rat give direction up or down
 
-        Debug.Log(currSpawn);
-
         if (currSpawn == 0 || currSpawn == 2 || currSpawn == 4)
         {
             newRat.GetComponent<RatSwarmAi>().setDirection(-180);
@@ -79,6 +77,9 @@ public class RatSpawnerScript : MonoBehaviour
         spawnTimer = maxSpawnTimer;
 
     }
+
+
+    
 
 
 

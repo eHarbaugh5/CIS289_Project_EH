@@ -9,14 +9,15 @@ public class RatSwarmAi : MonoBehaviour
     private Vector2 direction;
     private Vector2 lookDirection;
 
-
+    private float attackCooldown;
+    public float maxAttackCooldown;
 
 
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        attackCooldown = 0;
     }
 
     // Update is called once per frame
@@ -24,7 +25,10 @@ public class RatSwarmAi : MonoBehaviour
     {
 
         transform.position = Vector2.MoveTowards(transform.position, direction, speed * Time.deltaTime);
-
+        if (attackCooldown > 0)
+        {
+            attackCooldown -= Time.deltaTime;
+        }
 
     }
 
@@ -43,6 +47,27 @@ public class RatSwarmAi : MonoBehaviour
         
         
         
+
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+
+        if (collision.collider.gameObject.CompareTag("Player"))
+        {
+            if (attackCooldown <= 0)
+            {
+                collision.gameObject.GetComponent<PlayerMovement>().playerHit(1);
+                attackCooldown = maxAttackCooldown;
+            }
+        }
+        
+
+        if (collision.transform.CompareTag("TileMapCollider"))
+        {
+            Destroy(this.gameObject);
+        }
+
 
     }
 
