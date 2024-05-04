@@ -9,9 +9,12 @@ public class BossAiScript : MonoBehaviour
     private CapsuleCollider2D[] armsCollider;
     private BoxCollider2D attackCollider;
     public GameObject[] jumpLocations;
+    private EnemyHpHandler enemyHpHandler;
+    private EnemyHpHandler eatHpHandler;
     private int currLocation;
 
     private GameObject soupToEat;
+    private GameObject enemyToEat;
 
     private Rigidbody2D bossRB;
 
@@ -32,6 +35,7 @@ public class BossAiScript : MonoBehaviour
         bodyCollider = GetComponent<CircleCollider2D>();
         armsCollider = GetComponents<CapsuleCollider2D>();
         attackCollider = GetComponent<BoxCollider2D>();
+        enemyHpHandler = GetComponent<EnemyHpHandler>();
         jumpTimer = maxJumpTimer;
         currLocation = 0;
         canAttack = false;
@@ -77,10 +81,23 @@ public class BossAiScript : MonoBehaviour
             //  activate attack animation
 
             //  grab soup in trigger hitbox ahead
-            if (soupToEat != null)
+            if (soupToEat != null || enemyToEat != null)
             {
 
-                soupToEat.transform.position = Vector2.MoveTowards(soupToEat.transform.position, transform.position, 0.25f * Time.deltaTime);
+                if (soupToEat != null)
+                {
+                    soupToEat.transform.position = Vector2.MoveTowards(soupToEat.transform.position, transform.position, 0.15f * Time.deltaTime);
+                }
+                if (enemyToEat != null)
+                {
+                    if (eatHpHandler.getOnFire())
+                    {
+                        enemyToEat.transform.position = Vector2.MoveTowards(enemyToEat.transform.position, transform.position, 2f * Time.deltaTime);
+
+                    }
+
+
+                }
 
             }
             else
@@ -107,6 +124,7 @@ public class BossAiScript : MonoBehaviour
         //  move to new location
         canJump = false;
         soupToEat = null;
+        enemyToEat = null;
 
 
     }
@@ -167,23 +185,19 @@ public class BossAiScript : MonoBehaviour
         {
 
             soupToEat = collision.gameObject;
+        }
 
+        if (collision.transform.CompareTag("Enemy"))
+        {
+
+            enemyToEat = collision.gameObject;
+            eatHpHandler = enemyToEat.GetComponent<EnemyHpHandler>();
 
         }
 
        
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        //  remove current soup to eat
-        if (collision.gameObject == soupToEat)
-        {
-
-            soupToEat = null;
-        }
-        
-    }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -191,10 +205,16 @@ public class BossAiScript : MonoBehaviour
         if (collision.transform.CompareTag("Soup"))
         {
             
-
             Destroy(collision.gameObject);
             canAttack = false;
 
+        }
+
+        if (collision.transform.CompareTag("Enemy") && canAttack)
+        {
+            enemyHpHandler.takeDamage(10);
+            Destroy(collision.gameObject);
+            canAttack = false;
         }
     }
 

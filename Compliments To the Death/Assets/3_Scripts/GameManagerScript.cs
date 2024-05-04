@@ -56,21 +56,26 @@ public class GameManagerScript : MonoBehaviour
         }
 
 
-        if (Input.GetKeyUp(KeyCode.O))
+        if (Input.GetKeyUp(KeyCode.Y))
         {
 
             SceneManager.LoadScene("LevelOne");
 
         }
 
-        if (Input.GetKeyUp(KeyCode.P))
+        if (Input.GetKeyUp(KeyCode.U))
         {
 
             SceneManager.LoadScene("LevelTwo");
 
         }
 
-        if (Input.GetKeyUp(KeyCode.T))
+        if (Input.GetKeyUp(KeyCode.O))
+        {
+            SceneManager.LoadScene("LevelThree");
+        }
+
+        if (Input.GetKeyUp(KeyCode.I))
         {
 
             SceneManager.LoadScene("TrailerScene");

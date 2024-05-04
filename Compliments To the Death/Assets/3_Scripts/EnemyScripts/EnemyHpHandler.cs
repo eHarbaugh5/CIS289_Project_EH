@@ -59,7 +59,7 @@ public class EnemyHpHandler : MonoBehaviour
         if (currentHp <= 0)
         {
             //  die
-            Debug.Log(this.gameObject.transform.name + " Has been Slayen");
+            //Debug.Log(this.gameObject.transform.name + " Has been Slayen");
             Destroy(this.gameObject);
 
         }

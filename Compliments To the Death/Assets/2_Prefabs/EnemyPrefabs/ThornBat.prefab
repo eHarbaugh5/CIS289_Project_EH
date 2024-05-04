@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 2935221334990805292}
   - component: {fileID: 2350703083791013692}
   - component: {fileID: 4697791268338357879}
+  - component: {fileID: 8297574530181664349}
   m_Layer: 0
   m_Name: ThornBat
   m_TagString: Enemy
@@ -49,7 +50,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 507beecbc4deb264fa34afcd68edcdbc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0
+  speed: 2
+  maxAttackCooldown: 3
 --- !u!114 &771100025330739821
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -62,12 +64,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2bf98a292e234d409230ae9398b808d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHp: 0
+  maxHp: 15
   currentHp: 0
   fireDamage: 0
-  maxFireBurnTime: 0
-  isBurnable: 0
-  isFlying: 0
+  maxFireBurnTime: 8
+  isBurnable: 1
+  isFlying: 1
 --- !u!50 &2935221334990805292
 Rigidbody2D:
   serializedVersion: 4
@@ -94,7 +96,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!212 &2350703083791013692
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -177,6 +179,41 @@ CircleCollider2D:
     serializedVersion: 2
     m_Bits: 4294967295
   m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.5
+--- !u!58 &8297574530181664349
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4766199525743380749}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
