@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 //using UnityEngine.Windows;
 
 public class PlayerMovement : MonoBehaviour
@@ -48,7 +49,6 @@ public class PlayerMovement : MonoBehaviour
         playerRotationHandler();
         moveInput = new Vector2(inputHorizontal * movementSpeed, inputVertical * movementSpeed);
         playerRB.AddForce(moveInput);
-        //playerRB.velocity = moveInput;
 
     }
 
@@ -124,12 +124,27 @@ public class PlayerMovement : MonoBehaviour
         if (iFrames <= 0)
         {
             playerHp -= d;
+            if (playerHp <= 0)
+            {
+                //  current scene
+                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+
+            }
             iFrames = maxIFrames;
-            //Debug.Log("Hp " + playerHp);
         }
         
 
 
+    }
+
+    public float getPlayerHp()
+    {
+        return playerHp;
+    }
+
+    public void resetPlayerHp()
+    {
+        playerHp = 6;
     }
 
 }

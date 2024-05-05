@@ -20,7 +20,7 @@ public class WagonCarrotCollect : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.transform.CompareTag("Player") && !isCollected)
+        if (collision.transform.CompareTag("PlayerHitBox") && !isCollected)
         {
 
             collectCarrot();

@@ -8,15 +8,13 @@ public class GameManagerScript : MonoBehaviour
 {
     private GameObject Player;
     private GameObject MainCamera;
+    private GameObject spawnPoint;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        if (SceneManager.GetActiveScene().name == "LevelThree")
-        {
-            this.gameObject.SetActive(false);
-        }
+        
         Player = GameObject.FindWithTag("Player");
         MainCamera = GameObject.FindWithTag("MainCamera");
     }
@@ -33,6 +31,9 @@ public class GameManagerScript : MonoBehaviour
         //  in new scene grabs player and main camera
 
         Player = GameObject.FindWithTag("Player");
+        Player.GetComponent<PlayerMovement>().resetPlayerHp();
+        spawnPoint = GameObject.FindWithTag("SpawnPoint");
+        Player.transform.position = spawnPoint.transform.position;
         MainCamera = GameObject.FindWithTag("MainCamera");
 
     }

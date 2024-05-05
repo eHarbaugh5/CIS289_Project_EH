@@ -18,7 +18,7 @@ public class SignTextHandler : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
 
-        if (collision.transform.CompareTag("Player"))
+        if (collision.transform.CompareTag("PlayerHitBox"))
         {
             signText.SetActive(true);
             signTextBox.SetActive(true);
@@ -31,7 +31,7 @@ public class SignTextHandler : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.transform.CompareTag("Player"))
+        if (collision.transform.CompareTag("PlayerHitBox"))
         {
             signText.SetActive(false);
             signTextBox.SetActive(false);

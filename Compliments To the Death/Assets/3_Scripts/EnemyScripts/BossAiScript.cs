@@ -15,6 +15,7 @@ public class BossAiScript : MonoBehaviour
 
     private GameObject soupToEat;
     private GameObject enemyToEat;
+    private SoupHandler soupHandlerScript;
 
     private Rigidbody2D bossRB;
 
@@ -86,12 +87,14 @@ public class BossAiScript : MonoBehaviour
 
                 if (soupToEat != null)
                 {
+                    //  0.15f
                     soupToEat.transform.position = Vector2.MoveTowards(soupToEat.transform.position, transform.position, 0.15f * Time.deltaTime);
                 }
                 if (enemyToEat != null)
                 {
                     if (eatHpHandler.getOnFire())
                     {
+                        // 0.2f
                         enemyToEat.transform.position = Vector2.MoveTowards(enemyToEat.transform.position, transform.position, 2f * Time.deltaTime);
 
                     }
@@ -207,14 +210,16 @@ public class BossAiScript : MonoBehaviour
             
             Destroy(collision.gameObject);
             canAttack = false;
+            canJump = true;
 
         }
 
-        if (collision.transform.CompareTag("Enemy") && canAttack)
+        if (collision.transform.CompareTag("Enemy"))
         {
             enemyHpHandler.takeDamage(10);
             Destroy(collision.gameObject);
             canAttack = false;
+            canJump = true;
         }
     }
 

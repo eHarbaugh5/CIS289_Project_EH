@@ -69,7 +69,7 @@ void Start()
     private void OnCollisionEnter2D(Collision2D collision)
     {
         
-        if (collision.collider.gameObject.CompareTag("Player"))
+        if (collision.collider.gameObject.CompareTag("PlayerHitBox"))
         {
             if (attackCooldown <= 0)
             {

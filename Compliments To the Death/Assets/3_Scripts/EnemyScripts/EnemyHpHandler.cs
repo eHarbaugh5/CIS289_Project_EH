@@ -116,6 +116,11 @@ public class EnemyHpHandler : MonoBehaviour
         Destroy(this.gameObject);
     }
 
+    public float getCurrentHp()
+    {
+        return currentHp;
+    }
+
 
 
 

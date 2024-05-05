@@ -36,10 +36,10 @@ public class PitFallHandler : MonoBehaviour
 
         }
 
-        if (collision.transform.CompareTag("Player"))
+        if (collision.transform.CompareTag("PlayerHitBox"))
         {
             Debug.Log("Player Has Died");
-            SceneManager.LoadScene("LevelOne");
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
 
     }

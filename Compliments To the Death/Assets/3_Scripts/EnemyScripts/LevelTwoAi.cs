@@ -111,7 +111,7 @@ public class LevelTwoAi : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
 
-        if (collision.collider.gameObject.CompareTag("Player"))
+        if (collision.collider.gameObject.CompareTag("PlayerHitBox"))
         {
             collision.gameObject.GetComponent<PlayerMovement>().playerHit(1);
             attackCooldown = maxAttackCooldown;
