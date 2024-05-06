@@ -17,10 +17,13 @@ public class GameManagerScript : MonoBehaviour
 
     public bool isPaused;
 
+    private bool canCheat;
+
 
     // Start is called before the first frame update
     void Start()
     {
+        canCheat = false;
         isPaused = false;
         Player = GameObject.FindWithTag("Player");
         MainCamera = GameObject.FindWithTag("MainCamera");
@@ -105,34 +108,60 @@ public class GameManagerScript : MonoBehaviour
 
         }
 
+        if (Input.GetKeyUp(KeyCode.Backslash))
+        {
+            if (canCheat)
+            {
+                canCheat = false;
+            }
+            else
+            {
+                canCheat = true;
 
-        if (Input.GetKeyUp(KeyCode.Y))
+            }
+        }
+
+        if (canCheat)
         {
 
-            SceneManager.LoadScene("LevelOne");
+            if (Input.GetKeyUp(KeyCode.Y))
+            {
+
+                SceneManager.LoadScene("LevelOne");
+
+            }
+
+            if (Input.GetKeyUp(KeyCode.U))
+            {
+
+                SceneManager.LoadScene("LevelTwo");
+
+            }
+
+            if (Input.GetKeyUp(KeyCode.I))
+            {
+                SceneManager.LoadScene("LevelThree");
+            }
+
+
+
+            if (Input.GetKeyUp(KeyCode.O))
+            {
+
+                SceneManager.LoadScene("EndingScene");
+
+            }
+
+            if (Input.GetKeyUp(KeyCode.P))
+            {
+
+                SceneManager.LoadScene("MainMenu");
+
+            }
 
         }
 
-        if (Input.GetKeyUp(KeyCode.U))
-        {
-
-            SceneManager.LoadScene("LevelTwo");
-
-        }
-
-        if (Input.GetKeyUp(KeyCode.O))
-        {
-            SceneManager.LoadScene("LevelThree");
-        }
-
-
-
-        if (Input.GetKeyUp(KeyCode.M))
-        {
-
-            SceneManager.LoadScene("EndingScene");
-
-        }
+        
 
     }
 
