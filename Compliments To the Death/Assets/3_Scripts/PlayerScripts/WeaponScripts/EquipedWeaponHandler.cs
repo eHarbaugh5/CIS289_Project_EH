@@ -75,6 +75,7 @@ public class EquipedWeaponhandler : MonoBehaviour
             }
             updateCurrentWeapon(currentWeaponIndex);
         }
+        
 
 
     }

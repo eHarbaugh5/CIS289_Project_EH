@@ -33,6 +33,8 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        
         playerMovementHandler();
         if(iFrames > 0)
         {
@@ -47,7 +49,7 @@ public class PlayerMovement : MonoBehaviour
         inputHorizontal = Input.GetAxisRaw("Horizontal");
         inputVertical = Input.GetAxisRaw("Vertical");
         playerRotationHandler();
-        moveInput = new Vector2(inputHorizontal * movementSpeed, inputVertical * movementSpeed);
+        moveInput = new Vector2(inputHorizontal * movementSpeed * Time.deltaTime, inputVertical * movementSpeed * Time.deltaTime);
         playerRB.AddForce(moveInput);
 
     }

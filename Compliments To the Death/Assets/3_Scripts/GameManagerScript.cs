@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 //using UnityEditor.SearchService;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
 public class GameManagerScript : MonoBehaviour
@@ -10,13 +11,20 @@ public class GameManagerScript : MonoBehaviour
     private GameObject MainCamera;
     private GameObject spawnPoint;
 
+    [SerializeField] GameObject playerCanvas;
+    [SerializeField] GameObject pauseMenu;
+    [SerializeField] GameObject resumeButton;
+
+    public bool isPaused;
+
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        isPaused = false;
         Player = GameObject.FindWithTag("Player");
         MainCamera = GameObject.FindWithTag("MainCamera");
+
     }
 
 
@@ -30,12 +38,29 @@ public class GameManagerScript : MonoBehaviour
     {
         //  in new scene grabs player and main camera
 
-        Player = GameObject.FindWithTag("Player");
-        Player.GetComponent<PlayerMovement>().resetPlayerHp();
-        spawnPoint = GameObject.FindWithTag("SpawnPoint");
-        Player.transform.position = spawnPoint.transform.position;
+        
+        //if (SceneManager.GetActiveScene().name != "MainMenu")
+        //{
+            Player = GameObject.FindWithTag("Player");
+            Player.GetComponent<PlayerMovement>().resetPlayerHp();
+            spawnPoint = GameObject.FindWithTag("SpawnPoint");
+            Player.transform.position = spawnPoint.transform.position;
+        //}
         MainCamera = GameObject.FindWithTag("MainCamera");
 
+        if (SceneManager.GetActiveScene().name == "MainMenu" || SceneManager.GetActiveScene().name == "EndingScene")
+        {
+
+            playerCanvas.SetActive(false);
+
+        }
+        else
+        {
+            playerCanvas.SetActive(true);
+        }
+
+
+         
     }
 
     private void OnDisable()
@@ -51,9 +76,33 @@ public class GameManagerScript : MonoBehaviour
         MainCamera.transform.position = new Vector3 (Player.transform.position.x, Player.transform.position.y, MainCamera.transform.position.z);
 
 
-        if (Input.GetKey("escape"))
+        if (Input.GetKeyUp("escape"))
         {
-            Application.Quit();
+            if (SceneManager.GetActiveScene().name != "MainMenu" && SceneManager.GetActiveScene().name != "EndingScene")
+            {
+                if (!isPaused)
+                {
+                    //  pause
+                    isPaused = true;
+                    Time.timeScale = 0f;
+                    pauseMenu.SetActive(true);
+                    EventSystem.current.SetSelectedGameObject(resumeButton);
+
+
+                }
+                else if (isPaused)
+                {
+                    isPaused = false;
+                    Time.timeScale = 1f;
+                    pauseMenu.SetActive(false);
+                    EventSystem.current.SetSelectedGameObject(null);
+                }
+                //Application.Quit();
+            }
+
+
+
+
         }
 
 
@@ -76,20 +125,36 @@ public class GameManagerScript : MonoBehaviour
             SceneManager.LoadScene("LevelThree");
         }
 
-        if (Input.GetKeyUp(KeyCode.I))
-        {
-
-            SceneManager.LoadScene("TrailerScene");
-
-        }
 
 
         if (Input.GetKeyUp(KeyCode.M))
         {
 
-            SceneManager.LoadScene("MainMenu");
+            SceneManager.LoadScene("EndingScene");
 
         }
+
+    }
+
+    public void resumeGame()
+    {
+        isPaused = false;
+        Time.timeScale = 1f;
+        pauseMenu.SetActive(false);
+        EventSystem.current.SetSelectedGameObject(null);
+
+
+
+    }
+
+
+    public void returnToHome()
+    {
+        isPaused = false;
+        Time.timeScale = 1f;
+        pauseMenu.SetActive(false);
+        SceneManager.LoadScene("MainMenu");
+
 
     }
 
